@@ -1,0 +1,5 @@
+<%= stylesheet_pack_tag "application" %>
+@import "../../../node_modules/react-datepicker/dist/react-datepicker";
+h1 {
+  color: blue;
+}
