@@ -1,9 +1,6 @@
 import { Song } from "../resource_types/Song"
 
 function CSRFToken() : Map<string, string> {
-    debugger
-    const csrfParam : Element = document.querySelector('meta[name="csrf-param"]');
-    const key = (csrfParam?.content ?? "authenticity_token")
     const csrfTag : Element = document.querySelector('meta[name="csrf-token"]');
     const rVal = new Map()
     rVal['X-CSRF-TOKEN'] = (csrfTag?.content ?? "")

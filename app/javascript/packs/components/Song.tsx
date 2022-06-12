@@ -1,7 +1,7 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
 import {APIPost, Get as APIGet, Index as APIIndex} from "../api/Song"
-import {Link} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {Song, SongStatus} from "../resource_types/Song";
 import DatePicker from "react-datepicker";
 
@@ -13,7 +13,7 @@ export const Index = () => {
         })
     }, [])
     let renderSong = ((song) => {
-        return <div key={song.id}>
+        return <div key={song.id ?? 'new'}>
             <p>{song.title}</p>
             <Link to={`/songs/${song.id}`}>{song.title}</Link>
         </div>
@@ -25,10 +25,12 @@ export const Index = () => {
     </div>
 }
 
-export const Get = (id: number) => {
+export const Get = () => {
+    const params = useParams();
+    const {id} = params
     let [song, setSong] = useState(null)
     useEffect(() => {
-        APIGet(1).then((_song) => {
+        APIGet(id).then((_song) => {
             setSong(_song)
         })
     }, [id])
@@ -43,17 +45,21 @@ export const Create = (song?: Song) => {
     let[title, setTitle] = useState(song?.title)
     let[lastPlayed, setLastPlayed] = useState(song?.last_played)
     let[status, setStatus] = useState(song?.status ?? SongStatus.not_started)
+    let navigate = useNavigate()
 
     const statuses = Object.keys(SongStatus).map(key => {
         return <option value={SongStatus[key]}>{key}</option>
     })
 
     const handleSubmit = (event) => {
-        alert("POST Song")
         event.preventDefault()
         APIPost({id, status, bpm, title, last_played: lastPlayed}).then(response => {
             debugger
-            alert("Got response!")
+            const {redirected, url } = response
+            if(redirected) {
+                const path = new URL(url).pathname
+                navigate(path)
+            }
         })
     }
 
