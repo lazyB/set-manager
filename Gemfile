@@ -63,3 +63,5 @@ group :test do
 end
 
 gem "shakapacker", "= 6.3"
+
+gem "devise", "~> 4.8"
