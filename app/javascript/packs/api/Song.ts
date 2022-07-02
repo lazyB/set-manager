@@ -1,11 +1,6 @@
 import { Song } from "../resource_types/Song"
+import { CSRFToken } from "./Utils";
 
-function CSRFToken() : Map<string, string> {
-    const csrfTag : Element = document.querySelector('meta[name="csrf-token"]');
-    const rVal = new Map()
-    rVal['X-CSRF-TOKEN'] = (csrfTag?.content ?? "")
-    return rVal
-}
 
 export const Index = () : Promise<Song[]>  => {
     return fetch("/songs.json").then((result) => result.json())

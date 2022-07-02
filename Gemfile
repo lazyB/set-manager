@@ -65,3 +65,5 @@ end
 gem "shakapacker", "= 6.3"
 
 gem "devise", "~> 4.8"
+
+gem "devise-jwt", "~> 0.9.0"

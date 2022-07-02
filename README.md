@@ -5,16 +5,16 @@ application up and running.
 
 Current worklist:
 
-- [ ] Devise
+- [x] Devise
     - [x] Install gem
     - [x] Find devise setup steps
       - [x] Write them down right in here
       - https://github.com/heartcombo/devise#starting-with-rails
-    - [ ] Run through vanilla rails devise setup
-    - [ ] Confirm login stuff is working
-        - [ ] Create user
-        - [ ] Login
-        - [ ] Hide reset password for now
+    - [x] Run through vanilla rails devise setup
+    - [x] Confirm login stuff is working
+        - [x] Create user
+        - [x] Login
+        - [x] Hide reset password for now
 - [ ] react-devise
     - [ ] Install npm thinger
     - [ ] Make sure my dependencies are still working ok
@@ -25,3 +25,11 @@ Current worklist:
         - [ ] Login
         - [ ] bad create
         - [ ] bad login
+- [ ] No dice with default devise
+  - [x] Try this one
+    - https://medium.com/@mazik.wyry/rails-5-api-jwt-setup-in-minutes-using-devise-71670fd4ed03
+  - [ ] Build some RN pieces
+    - [ ] Simple login page
+      - [ ] Wire into JWT Devise
+    - [ ] Registration page
+      - [ ] Wire into JWT Devise plz
