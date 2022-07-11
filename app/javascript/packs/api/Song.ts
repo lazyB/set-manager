@@ -1,16 +1,22 @@
 import { Song } from "../resource_types/Song"
-import { CSRFToken } from "./Utils";
+import { DefaultHeaders } from "./Utils";
 
 
 export const Index = () : Promise<Song[]>  => {
-    return fetch("/songs.json").then((result) => result.json())
+    const options = {
+        headers: {...(DefaultHeaders()), 'Content-Type': 'application/json',},
+    }
+    return fetch("/songs.json", options).then((result) => result.json())
         .then((json) => {
             return json as Song[]
         })
 }
 
 export const Get = (id: number) : Promise<Song> => {
-    return fetch(`/songs/${id}.json`).then((result) => result.json())
+    const options = {
+        headers: {...(DefaultHeaders()), 'Content-Type': 'application/json',},
+    }
+    return fetch(`/songs/${id}.json`, options).then((result) => result.json())
         .then((json) => {
             return json as Song
         })
@@ -23,7 +29,7 @@ export const APIPost = (song: Song) : Promise<Response> => {
     if(song.id) {
         options = {
             method: 'PUT',
-            headers: {...(CSRFToken()), 'Content-Type': 'application/json',
+            headers: {...(DefaultHeaders()), 'Content-Type': 'application/json',
             },
             body,
         }
@@ -31,7 +37,7 @@ export const APIPost = (song: Song) : Promise<Response> => {
     }else {
         options = {
             method: 'POST',
-            headers: {...(CSRFToken()), 'Content-Type': 'application/json',
+            headers: {...(DefaultHeaders()), 'Content-Type': 'application/json',
             },
             body,
         }

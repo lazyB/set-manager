@@ -4,3 +4,12 @@ export function CSRFToken() : Map<string, string> {
     rVal['X-CSRF-TOKEN'] = (csrfTag?.content ?? "")
     return rVal
 }
+
+export function AuthToken(): Map<string, string> {
+    const rVal = {"Authorization": localStorage.getItem("Authorization")}
+    return rVal
+}
+
+export function DefaultHeaders() : Map<string, string> {
+    return {...CSRFToken(), ...AuthToken()}
+}

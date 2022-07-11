@@ -6,11 +6,11 @@ export const Login = (props) => {
     const doLogin = (e) => {
         e.preventDefault()
         APILogin(email, password).then((response) => {
-            debugger
-            alert("logged in!")
+            const jwt = response.headers.get("Authorization")
+            localStorage.setItem("Authorization", jwt)
         }).catch((error) => {
-            debugger
-            alert("OOps! " + error)
+            console.error(error)
+            localStorage.removeItem("Authorization")
         })
     }
     return <article> <h2>Here's where we log in</h2>
