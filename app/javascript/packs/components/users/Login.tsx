@@ -1,16 +1,25 @@
-import React, {useState} from "react"
+import * as React from "react";
+import { useState} from "react";
 import {Login as APILogin} from "../../api/User";
-export const Login = (props) => {
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
+import {APIConstants} from "../../utils/constants";
+import {useNavigate} from "react-router-dom";
+export const Login = (_) => {
+    const [email, setEmail] = useState<string>()
+    const [password, setPassword] = useState<string>()
+    const navigation = useNavigate()
     const doLogin = (e) => {
         e.preventDefault()
         APILogin(email, password).then((response) => {
-            const jwt = response.headers.get("Authorization")
-            localStorage.setItem("Authorization", jwt)
+            const authHeader = response.headers.get(APIConstants.AuthorizationHeaderKey)
+            if(authHeader) {
+                window.localStorage.setItem(APIConstants.AuthorizationHeaderKey, authHeader)
+            }else {
+                window.localStorage.removeItem(APIConstants.AuthorizationHeaderKey)
+            }
+            navigation('/songs/1')
         }).catch((error) => {
-            console.error(error)
-            localStorage.removeItem("Authorization")
+            alert("OOps! " + error)
+            window.localStorage.removeItem(APIConstants.AuthorizationHeaderKey)
         })
     }
     return <article> <h2>Here's where we log in</h2>

@@ -5,6 +5,8 @@ class SessionsController < Devise::SessionsController
   skip_before_action :verify_authenticity_token
   # before_action :configure_sign_in_params, only: [:create]
 
+  include ActionController::MimeResponds
+
   # GET /resource/sign_in
   # def new
   #   super
@@ -12,7 +14,10 @@ class SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    super
+    super do |resource|
+      puts "resource yielded: #{resource.to_s}"
+      @resource = resource
+    end
   end
 
   # DELETE /resource/sign_out

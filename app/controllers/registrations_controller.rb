@@ -6,7 +6,7 @@ class RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   def create
-    sanitized = params.require(:registration).permit(:email, :password)
+    sanitized = params.require(:user).permit(:email, :password)
     build_resource(sanitized)
 
     resource.save
