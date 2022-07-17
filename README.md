@@ -19,7 +19,7 @@ Current worklist:
     - [ ] Install npm thinger
     - [ ] Make sure my dependencies are still working ok
     - [ ] Run through setup steps in tutorial
-        - https://github.com/timscott/react-devise/wiki
+        - [ ] https://github.com/timscott/react-devise/wiki
     - [ ] Debug
         - [ ] Create user
         - [ ] Login
@@ -38,3 +38,12 @@ Current worklist:
     - [ ] Registration page
       - [ ] Wire into JWT Devise plz
     - [ ] Reset password page
+  - [ ] Check this devise business
+    - [ ] Am I logged in?
+    - [ ] Do I need a jwt, or is this happening on the session level?
+    - [ ] Redirect to login on bad auth
+      - [ ] programmatic redirect on auh callback
+      - [ ] detect unauthorized callback
+      - [ ] pass login redirect url as param to login page
+        - [ ] if present, on successful login send them back where they were
+        - [ ] if not present, send them to root view
