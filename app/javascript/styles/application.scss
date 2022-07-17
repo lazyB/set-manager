@@ -1,6 +1,2 @@
-<%= stylesheet_pack_tag "application" %>
 <%= stylesheet_pack_tag "../../../node_modules/react-datepicker/dist/react-datepicker" %>
-man fuck this shit
-                                                                                       h1 {
-                                                                                         color: red;
-                                                                                       }
+<%= stylesheet_pack_tag "~react-bootstrap/scss/bootstrap.scss"%>
