@@ -12,7 +12,7 @@ Current worklist:
       - https://github.com/heartcombo/devise#starting-with-rails
     - [x] Run through vanilla rails devise setup
     - [x] Confirm login stuff is working
-        - [x] Create user
+        - [x] fCreate user
         - [x] Login
         - [x] Hide reset password for now
 - [ ] react-devise
@@ -41,8 +41,8 @@ Current worklist:
   - [ ] Check this devise business
     - [ ] Am I logged in?
     - [ ] Do I need a jwt, or is this happening on the session level?
-    - [ ] Redirect to login on bad auth
-      - [ ] programmatic redirect on auh callback
+    - [x] Redirect to login on bad auth
+      - [x] programmatic redirect on auh callback
       - [ ] detect unauthorized callback
       - [ ] pass login redirect url as param to login page
         - [ ] if present, on successful login send them back where they were

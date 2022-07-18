@@ -1,26 +1,48 @@
 import * as React from 'react'
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import {Get, Index, Create} from "../components/Song";
 import {Login} from "../components/users/Login";
 import {Signup} from "../components/users/Signup";
 import {LayoutWithNavbar} from "../components/nav/NavBar";
-import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Alert from 'react-bootstrap/Alert';
+import RequireAuth from "./RequireAuth";
+import {isAuthed} from "../api/Utils";
+
+export const AppRoutes ={
+    User: {
+        Login: '/',
+        SignUp: '/sign_up'
+    },
+    Song: {
+        Index: '/songs',
+        Get: `/songs/:id`,
+        Create: 'songs/new',
+        Update: `/songs/:id/edit`,
+    }
+}
 
 export const AppRouter = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<LayoutWithNavbar/>}>
-                    <Route path="/" element={<Index/>}/>
-                    <Route path="/songs/:id" element={<Get/>}/>
-                    <Route path="/songs/new" element={<Create/>}/>
-                    <Route path="/users/sign_in" element={<Login/>}>
-                    </Route>
+                <Route path={AppRoutes.Song.Index} >
+                    <Route path={AppRoutes.Song.Index} element={<Index/>}/>
+                    <Route path={AppRoutes.Song.Get} element={<Get/>}/>
+                    <Route path={AppRoutes.Song.Create} element={<Create/>}/>
                 </Route>
-                <Route path="/login" element={Login}/>
-                <Route path="sign_up" element={Signup}/>
+                <Route path={AppRoutes.User.Login} element={<Login/>}/>
+                <Route path={AppRoutes.User.SignUp} element={<Signup/>}/>
+                <Route
+                exact
+                path="/"
+                render={() => {
+                    return (
+                        isAuthed() ?
+                            <Navigate to={AppRoutes.User.Login} /> :
+                            <Navigate to={AppRoutes.Song.Index} />
+                            )
+                }}
+            />
             </Routes>
         </BrowserRouter>
     )

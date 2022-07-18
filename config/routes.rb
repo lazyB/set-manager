@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  resources :react_apps
   devise_for :users,
-             path: '',
+             path: '/users',
              path_names: {
                sign_in: 'login',
                sign_out: 'logout',
@@ -18,5 +19,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
-  root 'songs#index'
+  root "react_app#index"
+  get '*path', to: 'react_app#index', format: :html
 end

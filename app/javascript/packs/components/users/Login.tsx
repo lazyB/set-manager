@@ -4,6 +4,7 @@ import {Login as APILogin} from "../../api/User";
 import {APIConstants} from "../../utils/constants";
 import {useNavigate} from "react-router-dom";
 export const Login = (_) => {
+    console.log("login")
     const [email, setEmail] = useState<string>()
     const [password, setPassword] = useState<string>()
     const navigation = useNavigate()
@@ -22,7 +23,7 @@ export const Login = (_) => {
             window.localStorage.removeItem(APIConstants.AuthorizationHeaderKey)
         })
     }
-    return <article> <h2>Here's where we log in</h2>
+    return <article> <h2>Log in</h2>
         <form onSubmit={doLogin}>
             <p>
                 <label>Enter your email</label>

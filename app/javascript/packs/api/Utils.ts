@@ -8,7 +8,7 @@ export function CSRFToken() : Map<string, string> {
 }
 export function AuthJWTHeader(): Map<string, string> {
     const rVal = new Map()
-    const authHeader = window.localStorage.get(APIConstants.AuthorizationHeaderKey)
+    const authHeader = window.localStorage.getItem(APIConstants.AuthorizationHeaderKey)
     if(authHeader){
         rVal[APIConstants.AuthorizationHeaderKey] = authHeader
     }
@@ -19,4 +19,12 @@ export function DefaultHeaders() : Headers {
     headers.append(APIConstants.AuthorizationHeaderKey, AuthJWTHeader().get(APIConstants.AuthorizationHeaderKey))
     headers.append(APIConstants.XCRFHeaderKey, CSRFToken().get(APIConstants.XCRFHeaderKey))
     return headers
+}
+
+export function isAuthed(): Boolean {
+    return window.localStorage.getItem(APIConstants.AuthorizationHeaderKey)
+}
+
+export function clearLogin(): void {
+    window.localStorage.removeItem(APIConstants.AuthorizationHeaderKey)
 }
