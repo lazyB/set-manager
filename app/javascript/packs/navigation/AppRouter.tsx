@@ -10,13 +10,13 @@ import {isAuthed} from "../api/Utils";
 
 export const AppRoutes ={
     User: {
-        Login: '/',
+        Login: '/login',
         SignUp: '/sign_up'
     },
     Song: {
         Index: '/songs',
         Get: `/songs/:id`,
-        Create: 'songs/new',
+        Create: '/songs/new',
         Update: `/songs/:id/edit`,
     }
 }
@@ -25,7 +25,7 @@ export const AppRouter = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path={AppRoutes.Song.Index} >
+                <Route path={AppRoutes.Song.Index} element={<LayoutWithNavbar/>}>
                     <Route path={AppRoutes.Song.Index} element={<Index/>}/>
                     <Route path={AppRoutes.Song.Get} element={<Get/>}/>
                     <Route path={AppRoutes.Song.Create} element={<Create/>}/>
@@ -33,16 +33,13 @@ export const AppRouter = () => {
                 <Route path={AppRoutes.User.Login} element={<Login/>}/>
                 <Route path={AppRoutes.User.SignUp} element={<Signup/>}/>
                 <Route
-                exact
-                path="/"
-                render={() => {
-                    return (
-                        isAuthed() ?
-                            <Navigate to={AppRoutes.User.Login} /> :
-                            <Navigate to={AppRoutes.Song.Index} />
-                            )
-                }}
-            />
+                    path="*"
+                   element={
+                       isAuthed() ?
+                           <Navigate to={AppRoutes.User.Login}/> :
+                           <Navigate to={AppRoutes.Song.Index}/>
+                   }
+                />
             </Routes>
         </BrowserRouter>
     )

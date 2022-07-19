@@ -4,9 +4,9 @@ import { DefaultHeaders } from "./Utils";
 
 export const Index = () : Promise<Song[]>  => {
     const options = {
-        headers: {...(DefaultHeaders()), 'Content-Type': 'application/json',},
+        headers: {...(DefaultHeaders())} ,
     }
-    return fetch("/songs.json", options).then((result) => result.json())
+    return fetch("/api/songs.json", options).then((result) => result.json())
         .then((json) => {
             return json as Song[]
         })
@@ -14,9 +14,9 @@ export const Index = () : Promise<Song[]>  => {
 
 export const Get = (id: number) : Promise<Song> => {
     const options = {
-        headers: {...(DefaultHeaders()), 'Content-Type': 'application/json',},
+        headers: {...(DefaultHeaders())},
     }
-    return fetch(`/songs/${id}.json`, options).then((result) => result.json())
+    return fetch(`/api/songs/${id}.json`, options).then((result) => result.json())
         .then((json) => {
             return json as Song
         })

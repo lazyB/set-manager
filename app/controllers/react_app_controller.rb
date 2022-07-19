@@ -1,6 +1,5 @@
 class ReactAppController < ApplicationController
-  # GET /react_apps or /react_apps.json
+  respond_to :html
   def index
-    @react_apps = ReactApp.all
   end
 end

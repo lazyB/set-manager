@@ -16,6 +16,8 @@ export function AuthJWTHeader(): Map<string, string> {
 }
 export function DefaultHeaders() : Headers {
     let headers = new Headers()
+    headers.append('content-type', 'application/json')
+    headers.append('accept', 'application/json')
     headers.append(APIConstants.AuthorizationHeaderKey, AuthJWTHeader().get(APIConstants.AuthorizationHeaderKey))
     headers.append(APIConstants.XCRFHeaderKey, CSRFToken().get(APIConstants.XCRFHeaderKey))
     return headers

@@ -35,6 +35,7 @@ export const Get = () => {
         })
     }, [id])
     return <div>
+        <p>Song</p>
         <p>Get Song {song?.title ?? "loading"}</p>
     </div>
 }

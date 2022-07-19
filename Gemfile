@@ -67,6 +67,3 @@ gem "shakapacker", "= 6.3"
 gem "devise", "~> 4.8"
 
 gem "devise-jwt", "~> 0.9.0"
-
-gem "ruby-debug-ide", "~> 0.7.3"
-gem "debase", "= 0.2.5.beta2"

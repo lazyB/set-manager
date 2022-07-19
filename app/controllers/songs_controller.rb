@@ -61,7 +61,8 @@ class SongsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_song
-      @song = Song.find(params[:id])
+      song_id = params.permit(:id)[:id].to_i
+      @song = Song.find(song_id)
     end
 
     # Only allow a list of trusted parameters through.
