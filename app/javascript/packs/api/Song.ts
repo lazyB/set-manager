@@ -6,7 +6,14 @@ export const Index = () : Promise<Song[]>  => {
     const options = {
         headers: {...(DefaultHeaders())} ,
     }
-    return fetch("/api/songs.json", options).then((result) => result.json())
+    return fetch("/api/songs.json", options).then((result) => {
+        const {ok, status, statusText} = result
+        if(!ok) {
+            throw new Error(statusText ?? status.toString())
+        }else {
+            return result.json()
+        }
+    })
         .then((json) => {
             return json as Song[]
         })

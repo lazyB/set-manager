@@ -4,12 +4,22 @@ import {APIPost, Get as APIGet, Index as APIIndex} from "../api/Song"
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {Song, SongStatus} from "../resource_types/Song";
 import DatePicker from "react-datepicker";
+import {APIConstants} from "../utils/constants";
+import {AppRoutes} from "../navigation/AppRouter";
 
 export const Index = () => {
+    let navigate = useNavigate()
     let [songs, setSongs] = useState([])
     useEffect(() => {
         APIIndex().then((apiSongs) => {
             setSongs(apiSongs)
+        }).catch(({message}) => {
+            console.error(message)
+            if(message === APIConstants.Unauthorized) {
+                navigate(AppRoutes.User.Login)
+            }else{
+                alert(message)
+            }
         })
     }, [])
     let renderSong = ((song) => {
@@ -27,11 +37,15 @@ export const Index = () => {
 
 export const Get = () => {
     const params = useParams();
+    const navigation  = useNavigate()
     const {id} = params
     let [song, setSong] = useState(null)
     useEffect(() => {
         APIGet(id).then((_song) => {
             setSong(_song)
+        }).catch((error) => {
+            console.error(error)
+            alert(error)
         })
     }, [id])
     return <div>
@@ -39,7 +53,7 @@ export const Get = () => {
         <p>Get Song {song?.title ?? "loading"}</p>
     </div>
 }
-
+``
 export const Create = (song?: Song) => {
     let id = song?.id
     let[bpm, setBpm] = useState(song?.bpm ?? 120)
