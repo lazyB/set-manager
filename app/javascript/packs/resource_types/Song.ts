@@ -10,6 +10,6 @@ export type Song = {
     title: string
     last_played: string
     status: SongStatus
-    created_at: string
-    updated_at: string
+    created_at?: string
+    updated_at?: string
 }

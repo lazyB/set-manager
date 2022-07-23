@@ -29,26 +29,25 @@ export const Get = (id: number) : Promise<Song> => {
         })
 }
 
-export const APIPost = (song: Song) : Promise<Response> => {
+export const APIPost = (song: Song) : Promise<Song> => {
     const body : string = JSON.stringify({song})
     let path
     let options
+    const defaultHeaders = DefaultHeaders()
     if(song.id) {
         options = {
             method: 'PUT',
-            headers: {...(DefaultHeaders()), 'Content-Type': 'application/json',
-            },
+            headers: defaultHeaders,
             body,
         }
         path = `/songs/${song.id}`
     }else {
         options = {
             method: 'POST',
-            headers: {...(DefaultHeaders()), 'Content-Type': 'application/json',
-            },
+            headers: defaultHeaders,
             body,
         }
-        path = `/songs`
+        path = `/api/songs`
     }
-    return fetch(path, options)
+    return fetch(path, options).then((result) => result.json())
 }

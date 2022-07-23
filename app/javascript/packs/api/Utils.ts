@@ -19,12 +19,12 @@ export function DefaultHeaders() : Headers {
     headers.append('content-type', 'application/json')
     headers.append('accept', 'application/json')
     headers.append(APIConstants.AuthorizationHeaderKey, AuthJWTHeader().get(APIConstants.AuthorizationHeaderKey))
-    headers.append(APIConstants.XCRFHeaderKey, CSRFToken().get(APIConstants.XCRFHeaderKey))
+    headers.append(APIConstants.XCRFHeaderKey,  CSRFToken()[APIConstants.XCRFHeaderKey])
     return headers
 }
 
 export function isAuthed(): Boolean {
-    return window.localStorage.getItem(APIConstants.AuthorizationHeaderKey)
+    return !!window.localStorage.getItem(APIConstants.AuthorizationHeaderKey)
 }
 
 export function clearLogin(): void {

@@ -6,7 +6,7 @@ import Alert from "react-bootstrap/Alert";
 
 export function LayoutWithNavbar() {
     return (<>
-            <Navbar bg={"dark"}  variant={"dark"} fixed={"top"}>
+            <Navbar bg={"dark"}  variant={"dark"}>
                 <Container>
                     <Navbar.Text>
                         This is my first link

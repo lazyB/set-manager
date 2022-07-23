@@ -38,7 +38,7 @@ export const Index = () => {
 export const Get = () => {
     const params = useParams();
     const navigation  = useNavigate()
-    const {id} = params
+    const id = Number(params.id)
     let [song, setSong] = useState(null)
     useEffect(() => {
         APIGet(id).then((_song) => {
@@ -56,9 +56,10 @@ export const Get = () => {
 ``
 export const Create = (song?: Song) => {
     let id = song?.id
+    let songLastPlayed = song?.last_played ? new Date(song?.last_played) : null
     let[bpm, setBpm] = useState(song?.bpm ?? 120)
-    let[title, setTitle] = useState(song?.title)
-    let[lastPlayed, setLastPlayed] = useState(song?.last_played)
+    let[title, setTitle] = useState(song?.title ?? '')
+    let[lastPlayed, setLastPlayed] = useState<Date|null>(songLastPlayed)
     let[status, setStatus] = useState(song?.status ?? SongStatus.not_started)
     let navigate = useNavigate()
 
@@ -68,12 +69,10 @@ export const Create = (song?: Song) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        APIPost({id, status, bpm, title, last_played: lastPlayed}).then(response => {
-            debugger
-            const {redirected, url } = response
-            if(redirected) {
-                const path = new URL(url).pathname
-                navigate(path)
+        APIPost({id, status, bpm, title, last_played: lastPlayed.toISOString()}).then(response => {
+            const {id} = response as any
+            if(id) {
+                navigate(AppRoutes.Song.Get, {state: {id}})
             }
         })
     }
@@ -81,8 +80,8 @@ export const Create = (song?: Song) => {
     return <form onSubmit={handleSubmit}>
         <label>Song</label>
         <input type={"text"} name={"title"} value={title} onChange={(e) => setTitle(e.target.value)}/>
-        <input type={"number"} name={"bpm"} value={bpm} onChange={(e) => setBpm(e.target.value)}/>
-        <select value={status} onChange={(e) => setStatus(e.target.value)}>
+        <input type={"number"} name={"bpm"} value={bpm} onChange={(e) => setBpm(Number(e.target.value))}/>
+        <select value={status} onChange={(e) => setStatus(SongStatus[e.target.value])}>
             {statuses}
         </select>
         <DatePicker selected={lastPlayed} onChange={(date:Date) => setLastPlayed(date)} />
