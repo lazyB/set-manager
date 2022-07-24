@@ -4,8 +4,12 @@ import {APIPost, Get as APIGet, Index as APIIndex} from "../api/Song"
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {Song, SongStatus} from "../resource_types/Song";
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import {APIConstants} from "../utils/constants";
 import {AppRoutes} from "../navigation/AppRouter";
+import {Button, Form as BootForm } from "react-bootstrap";
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 export const Index = () => {
     let navigate = useNavigate()
@@ -76,14 +80,30 @@ export const Create = (song?: Song) => {
         })
     }
 
-    return <form onSubmit={handleSubmit}>
-        <label>Song</label>
-        <input type={"text"} name={"title"} value={title} onChange={(e) => setTitle(e.target.value)}/>
-        <input type={"number"} name={"bpm"} value={bpm} onChange={(e) => setBpm(Number(e.target.value))}/>
-        <select value={status} onChange={(e) => setStatus(SongStatus[e.target.value])}>
-            {statuses}
-        </select>
-        <DatePicker selected={lastPlayed} onChange={(date:Date) => setLastPlayed(date)} />
-        <input type="submit" value="Submit" />
-    </form>
+    return (<Formik
+        initialValues={
+            {title: '', bpm: 120}
+        }
+        validationSchema={Yup.object({
+            title: Yup.string()
+                .required('Required'),
+            bpm: Yup.number()
+                .min(40, 'You need a nap?')
+                .max(240, 'Whoa dude.  Hol up.')
+                .required('Required'),
+        })}
+        onSubmit={(values, { setSubmitting }) =>
+        {alert(JSON.stringify(values, null, 2))}}>
+        <Form>
+            <p>Song</p>
+            <Field type={"text"}
+                   name="title"/>
+            <ErrorMessage name="title"/>
+            <p>BPM</p>
+            <Field type={"number"} name={"bpm"}/>
+            <ErrorMessage name={"bpm"}/>
+            <Button variant={"primary"} type="submit">Submit</Button>
+        </Form>
+    </Formik>)
+
 }

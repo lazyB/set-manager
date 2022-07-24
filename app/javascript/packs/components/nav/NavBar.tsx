@@ -5,7 +5,7 @@ import {Outlet} from "react-router-dom";
 import {AppRoutes} from "../../navigation/AppRouter";
 
 export function LayoutWithNavbar() {
-    return (<>
+    return (<Container>
             <Navbar>
                 <Container>
                     <LinkContainer to={AppRoutes.Song.Index}>
@@ -13,7 +13,9 @@ export function LayoutWithNavbar() {
                     </LinkContainer>
                 </Container>
             </Navbar>
-            <Outlet/>
-        </>
+            <Container>
+                <Outlet/>
+            </Container>
+        </Container>
     )
 }
