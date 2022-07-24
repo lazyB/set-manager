@@ -47,3 +47,6 @@ Current worklist:
       - [ ] pass login redirect url as param to login page
         - [ ] if present, on successful login send them back where they were
         - [ ] if not present, send them to root view
+    - [ ] Form roundup
+        - [ ] Error messages looking nice
+        - [ ] Get my form containers padding/margin right
