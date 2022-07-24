@@ -28,13 +28,13 @@ Current worklist:
 - [ ] No dice with default devise
   - [x] Try this one
     - https://medium.com/@mazik.wyry/rails-5-api-jwt-setup-in-minutes-using-devise-71670fd4ed03
-  - [ ] Build some RN pieces
+  - [x] Build some RN pieces
     - [x] Simple login page
       - [x] Wire into JWT Devise
   - [ ] Fix RN Nav
-    - [ ] patch back in index page
-    - [ ] put together nav bar
-    - [ ] if not authed, redirect to login
+    - [x] patch back in index page
+    - [x] put together nav bar
+    - [x] if not authed, redirect to login
     - [ ] Registration page
       - [ ] Wire into JWT Devise plz
     - [ ] Reset password page
