@@ -1,26 +1,16 @@
 import * as React from "react";
-import {Container, Navbar} from "react-bootstrap";
+import {Container, Nav, Navbar} from "react-bootstrap";
+import {LinkContainer} from "react-router-bootstrap";
 import {Outlet} from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import Alert from "react-bootstrap/Alert";
+import {AppRoutes} from "../../navigation/AppRouter";
 
 export function LayoutWithNavbar() {
     return (<>
-            <Navbar bg={"dark"}  variant={"dark"}>
+            <Navbar>
                 <Container>
-                    <Navbar.Text>
-                        This is my first link
-                    </Navbar.Text>
-                </Container>
-                <Container>
-                    <Navbar.Text>
-                        This is my second link
-                    </Navbar.Text>
-                </Container>
-                <Container>
-                    <Navbar.Text>
-                        This is my third link
-                    </Navbar.Text>
+                    <LinkContainer to={AppRoutes.Song.Index}>
+                        <Nav.Link >Songs</Nav.Link>
+                    </LinkContainer>
                 </Container>
             </Navbar>
             <Outlet/>

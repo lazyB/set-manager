@@ -43,7 +43,7 @@ Current worklist:
     - [ ] Do I need a jwt, or is this happening on the session level?
     - [x] Redirect to login on bad auth
       - [x] programmatic redirect on auh callback
-      - [ ] detect unauthorized callback
+      - [x] detect unauthorized callback
       - [ ] pass login redirect url as param to login page
         - [ ] if present, on successful login send them back where they were
         - [ ] if not present, send them to root view

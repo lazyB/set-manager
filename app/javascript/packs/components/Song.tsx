@@ -29,7 +29,6 @@ export const Index = () => {
         </div>
     })
     return <div>
-        <p>Songs will go here</p>
         {songs.map((song) => renderSong(song))}
         <Link to={'/songs/new'}>New Song</Link>
     </div>
