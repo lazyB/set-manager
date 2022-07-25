@@ -3,7 +3,7 @@
 class SessionsController < Devise::SessionsController
   respond_to :json
   skip_before_action :verify_authenticity_token
-  # before_action :configure_sign_in_params, only: [:create]
+  before_action :configure_sign_in_params, only: [:create]
 
   include ActionController::MimeResponds
 
@@ -29,7 +29,7 @@ class SessionsController < Devise::SessionsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_in_params
-    devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :password])
+    devise_parameter_sanitizer.permit(:user, keys: [:email, :password])
   end
 
     private
