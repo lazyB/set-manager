@@ -14,10 +14,11 @@ export const Login = (_) => {
             const authHeader = response.headers.get(APIConstants.AuthorizationHeaderKey)
             if(authHeader) {
                 window.localStorage.setItem(APIConstants.AuthorizationHeaderKey, authHeader)
+                navigation('/')
             }else {
                 window.localStorage.removeItem(APIConstants.AuthorizationHeaderKey)
+                alert("Login failed.")
             }
-            navigation('/songs/1')
         }).catch((error) => {
             alert("OOps! " + error)
             window.localStorage.removeItem(APIConstants.AuthorizationHeaderKey)
