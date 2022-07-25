@@ -1,12 +1,12 @@
-import {CSRFToken} from "./Utils";
+import {CSRFToken, DefaultHeaders} from "./Utils";
 
 export const Login = (email: string, password: string) : Promise<Response> => {
     const body : string = JSON.stringify({user: {email, password}})
     let path
-
+    const defaultHeaders = DefaultHeaders()
     const options = {
         method: 'POST',
-        // headers: {...(CSRFToken()), 'Content-Type': 'application/json'},
+        headers: defaultHeaders,
         body,
     }
     path = `/api/users/login.json`
