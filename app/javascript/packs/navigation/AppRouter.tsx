@@ -3,6 +3,7 @@ import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 import {Get, Index, Create} from "../components/Song";
 import {Login} from "../components/users/Login";
 import {Signup} from "../components/users/Signup";
+import DefaultLayout from "../theme/src/layout/DefaultLayout"
 import {LayoutWithNavbar} from "../components/nav/NavBar";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import RequireAuth from "./RequireAuth";
@@ -25,7 +26,7 @@ export const AppRouter = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path={AppRoutes.Song.Index} element={<LayoutWithNavbar/>}>
+                <Route path={AppRoutes.Song.Index} element={<DefaultLayout/>}>
                     <Route path={AppRoutes.Song.Index} element={<Index/>}/>
                     <Route path={AppRoutes.Song.Get} element={<Get/>}/>
                     <Route path={AppRoutes.Song.Create} element={<Create/>}/>
@@ -36,8 +37,8 @@ export const AppRouter = () => {
                     path="*"
                    element={
                        isAuthed() ?
-                           <Navigate to={AppRoutes.User.Login}/> :
-                           <Navigate to={AppRoutes.Song.Index}/>
+                           <Navigate to={AppRoutes.Song.Index}/> :
+                           <Navigate to={AppRoutes.User.Login}/>
                    }
                 />
             </Routes>
