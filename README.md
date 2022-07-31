@@ -50,3 +50,17 @@ Current worklist:
     - [ ] Form roundup
         - [ ] Error messages looking nice
         - [ ] Get my form containers padding/margin right
+- fix user settings page
+  - email
+    - password
+- login page style
+    - cop the styler thing
+- reset password thing
+    - send an email
+- song index
+    - red/yellow/blue on status
+- song update page
+    - status
+    - last played
+- show song page
+  
