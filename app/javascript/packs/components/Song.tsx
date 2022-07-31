@@ -10,6 +10,9 @@ import {AppRoutes} from "../navigation/AppRouter";
 import {Button, Form as BootForm } from "react-bootstrap";
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import {cilArrowRight, cilChartPie} from "@coreui/icons";
+import CIcon from "@coreui/icons-react";
+import {CCol, CLink, CRow, CWidgetStatsF} from "@coreui/react";
 
 export const Index = () => {
     let navigate = useNavigate()
@@ -27,10 +30,26 @@ export const Index = () => {
         })
     }, [])
     let renderSong = ((song) => {
-        return <div key={song.id ?? 'new'}>
-            <p>{song.title}</p>
-            <Link to={`/songs/${song.id}`}>{song.title}</Link>
-        </div>
+        return <CRow key={song.id}>
+            <CCol xs={12}>
+                <CWidgetStatsF
+                    className="mb-3"
+                    color="primary"
+                    icon={<CIcon icon={cilChartPie} height={24} />}
+                    title={song.last_played || "Never played"}
+                    value={song.title}
+                    footer={
+                        <CLink
+                            className="font-weight-bold font-xs text-medium-emphasis"
+                            href={`/songs/${song.id}`}
+                        >
+                            View more
+                            <CIcon icon={cilArrowRight} className="float-end" width={16} />
+                        </CLink>
+                    }
+                />
+            </CCol>
+        </CRow>
     })
     return <div>
         {songs.map((song) => renderSong(song))}

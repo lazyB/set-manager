@@ -8,6 +8,7 @@
     "@babel/preset-react": "^7.17.12",
     "@babel/preset-typescript": "^7.16.7",
     "@babel/runtime": "^7.18.3",
+    "@coreui/coreui": "^4.2.0",
     "@coreui/icons": "^2.1.0",
     "@coreui/icons-react": "^2.1.0",
     "@coreui/react": "^4.3.0",

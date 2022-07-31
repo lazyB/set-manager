@@ -18,6 +18,7 @@ import {createRoot} from "react-dom/client";
 import React from "react";
 import {AppRouter} from "./navigation/AppRouter"
 
+import("../styles/application.scss")
 const container =  document.getElementById("REACT_ROOT")
 const root = createRoot(container);
 root.render(<AppRouter/>);

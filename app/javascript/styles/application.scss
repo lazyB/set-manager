@@ -1,2 +1,3 @@
-<%= stylesheet_pack_tag "../../../node_modules/react-datepicker/dist/react-datepicker" %>
-<%= stylesheet_pack_tag "~react-bootstrap/scss/bootstrap.scss"%>
+@import "~bootstrap";
+@import "~react-datepicker";
+@import "scss/style";
