@@ -4,7 +4,7 @@ class SongsController < ApplicationController
 
   # GET /songs or /songs.json
   def index
-    @songs = Song.all
+    @songs = Song.where(user: current_user).all
   end
 
   # GET /songs/1 or /songs/1.json
@@ -23,6 +23,7 @@ class SongsController < ApplicationController
   # POST /songs or /songs.json
   def create
     @song = Song.new(song_params)
+    @song.user = current_user
 
     respond_to do |format|
       if @song.save

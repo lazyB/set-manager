@@ -17,6 +17,7 @@ export const AppRoutes ={
     Song: {
         Index: '/songs',
         Get: `/songs/:id`,
+        GetForId: (id) => `/songs/${id}`,
         Create: '/songs/new',
         Update: `/songs/:id/edit`,
     }

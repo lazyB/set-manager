@@ -89,14 +89,20 @@ export const Create = (song?: Song) => {
         return <option value={SongStatus[key]}>{key}</option>
     })
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
-        APIPost({id, status, bpm, title, last_played: lastPlayed.toISOString()}).then(response => {
-            const {id} = response as any
-            if(id) {
-                navigate(AppRoutes.Song.Get, {state: {id}})
-            }
-        })
+    const handleSubmit = (values) => {
+        let {id, status, bpm, title, lastPlayed} = values
+        lastPlayed = lastPlayed || new Date
+        APIPost({id, status, bpm, title,last_played: lastPlayed.toISOString()})
+            .then(response => {
+                const {id} = response as any
+                if(id) {
+                    navigate(AppRoutes.Song.GetForId(id), {state: {id: id}})
+                }
+            })
+            .catch((error) => {
+                console.error(error)
+                alert(error)
+            })
     }
 
     return (<Formik
@@ -112,7 +118,7 @@ export const Create = (song?: Song) => {
                 .required('Required'),
         })}
         onSubmit={(values, { setSubmitting }) =>
-        {alert(JSON.stringify(values, null, 2))}}>
+            handleSubmit(values)}>
         <Form>
             <p>Song</p>
             <Field type={"text"}

@@ -1,4 +1,5 @@
-import React, {useState} from "react"
+import * as React from "react";
+import { useState} from "react";
 import {Signup as APISignup} from "../../api/User";
 import {
     CButton,
@@ -27,8 +28,10 @@ export const Signup = (props) => {
             alert("Error: all sign in fields must be completed and passwords must match.")
         }
         APISignup(email, password).then((response) => {
-            if(response.ok) {
-                navigation('/')
+            const authHeader = response.headers.get(APIConstants.AuthorizationHeaderKey)
+            if(authHeader) {
+                window.localStorage.setItem(APIConstants.AuthorizationHeaderKey, authHeader)
+                navigation('/songs')
             }else {
                 window.localStorage.removeItem(APIConstants.AuthorizationHeaderKey)
                 alert("Register failed.")

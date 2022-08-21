@@ -1,3 +1,4 @@
+
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -59,8 +60,13 @@ Current worklist:
     - send an email
 - song index
     - red/yellow/blue on status
+- show song page
+  - Make it look nicer
+  - add in edit button linking to update page
 - song update page
     - status
     - last played
-- show song page
-  
+- formik up my registration page
+- Test out this registration -> jwt login type business, seems like it isn't adding in my header the
+way I wanted
+- Set up nav to get to songs from top bar
