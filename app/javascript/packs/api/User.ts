@@ -18,7 +18,7 @@ export const Signup = (email: string, password: string) : Promise<Response> => {
     let path
     const options = {
         method: 'POST',
-        headers: {...(CSRFToken()), 'Content-Type': 'application/json'},
+        headers: DefaultHeaders(),
         body,
     }
     path = `/api/users/signup.json`
