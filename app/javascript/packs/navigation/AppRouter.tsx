@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
-import {Get, Index, Create} from "../components/Song";
+import {Get, Edit, Index, Create} from "../components/Song";
 import {Login} from "../components/users/Login";
 import {Signup} from "../components/users/Signup";
 import DefaultLayout from "../theme/src/layout/DefaultLayout"
@@ -17,6 +17,8 @@ export const AppRoutes ={
     Song: {
         Index: '/songs',
         Get: `/songs/:id`,
+        Edit: '/songs/edit/:id',
+        EditForId: (id) => `/songs/edit/${id}`,
         GetForId: (id) => `/songs/${id}`,
         Create: '/songs/new',
         Update: `/songs/:id/edit`,
@@ -30,6 +32,7 @@ export const AppRouter = () => {
                 <Route path={AppRoutes.Song.Index} element={<DefaultLayout/>}>
                     <Route path={AppRoutes.Song.Index} element={<Index/>}/>
                     <Route path={AppRoutes.Song.Get} element={<Get/>}/>
+                    <Route path={AppRoutes.Song.Edit} element={<Edit/>}/>
                     <Route path={AppRoutes.Song.Create} element={<Create/>}/>
                 </Route>
                 <Route path={AppRoutes.User.Login} element={<Login/>}/>

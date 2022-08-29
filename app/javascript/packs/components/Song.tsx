@@ -62,6 +62,7 @@ export const Get = () => {
     const navigation  = useNavigate()
     const id = Number(params.id)
     let [song, setSong] = useState(null)
+
     useEffect(() => {
         APIGet(id).then((_song) => {
             setSong(_song)
@@ -70,12 +71,110 @@ export const Get = () => {
             alert(error)
         })
     }, [id])
-    return <div>
-        <p>Song</p>
-        <p>Get Song {song?.title ?? "loading"}</p>
+    return <div className="card mb-4">
+        <div className="card-header">
+            {song?.title ?? "loading"}
+        </div>
+        <div className="card-body">
+            <CLink
+                className="font-weight-bold font-xs text-medium-emphasis"
+                href={`/songs/edit/${id}`}
+            >
+                Edit
+            </CLink>
+        </div>
     </div>
 }
-``
+
+export const Edit = (props) => {
+    const params = useParams();
+    const id = Number(params.id)
+    let [song, setSong] = useState(null)
+    const [bpm, setBpm] = useState(120)
+    const [title, setTitle] = useState("")
+    const [lastPlayed, setLastPlayed] = useState(null)
+    const handleSubmit = (values) => {
+        let {id, status, bpm, title} = values
+        APIPost({id, status, bpm, title,last_played: lastPlayed.toISOString()})
+            .then(response => {
+                const {id} = response as any
+                if(id) {
+                    navigate(AppRoutes.Song.GetForId(id), {state: {id: id}})
+                }
+            })
+            .catch((error) => {
+                console.error(error)
+                alert(error)
+            })
+    }
+    useEffect(() => {
+        APIGet(id).then((_song) => {
+            setSong(_song)
+            const {title, bpm, last_played} = _song
+            setTitle(title)
+            setBpm(bpm)
+            setLastPlayed(new Date(last_played))
+        }).catch((error) => {
+            console.error(error)
+            alert(error)
+        })
+    }, [id])
+    let navigate = useNavigate()
+
+    if(!song) {
+        <p>Loading</p>
+    }else {
+        return (
+            <div className="card mb-4 w-50">
+                <div className="card-header">
+                    Edit Song
+                </div>
+                <div className="card-body">
+                    <Formik
+                        initialValues={
+                            {title, bpm}
+                        }
+                        validationSchema={Yup.object({
+                            title: Yup.string()
+                                .required('Required'),
+                            bpm: Yup.number()
+                                .min(40, 'You need a nap?')
+                                .max(240, 'Whoa dude.  Hol up.')
+                                .required('Required'),
+                        })}
+                        onSubmit={(values, {setSubmitting}) =>
+                            handleSubmit(values)}>
+                        <Form className="row g-3">
+                            <div className="mb-3">
+                                <label className="form-label">Song</label>
+                                <Field className="form-control"
+                                       type={"text"}
+                                       name="title"/>
+                                <ErrorMessage name="title"/>
+                            </div>
+                            <div className="mb-3 w-50 col">
+                                <label className="form-label">BPM</label>
+                                <Field className="form-control"
+                                       type={"number"} name={"bpm"}/>
+                                <ErrorMessage name={"bpm"}/>
+                            </div>
+
+                            <div className="mb-6 w-50 col">
+                                <label className="form-label">Last Played</label>
+                                <DatePicker className="form-control"
+                                            type="date" name={"lastPlayed"} selected={lastPlayed} onChange={(date:Date) => setLastPlayed(date)} />
+                            </div>
+                            <div className="mb-3 col-12">
+                                <Button variant={"primary"} type="submit">Submit</Button>
+                            </div>
+                        </Form>
+                    </Formik>
+                </div>
+            </div>
+        )
+    }
+}
+
 export const Create = (song?: Song) => {
     let id = song?.id
     let songLastPlayed = song?.last_played ? new Date(song?.last_played) : null
