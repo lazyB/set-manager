@@ -12,4 +12,5 @@ export type Song = {
     status: SongStatus
     created_at?: string
     updated_at?: string
+    data_file?: File
 }

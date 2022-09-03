@@ -66,6 +66,6 @@ class SongsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def song_params
-      params.require(:song).permit(:bpm, :title, :last_played, :status)
+      params.require(:song).permit(:bpm, :title, :last_played, :status, :data_file)
     end
 end
